@@ -17,8 +17,18 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "HP Mehendi Art | Elegant Mehndi Designs",
-  description: "Bridal, Baby Shower, Traditional & More. Henna Artist by Himani Patel located in Surat.",
+  title: "HP Mehendi Art | Elegant Mehndi Designs in Surat",
+  description: "Bridal, Baby Shower, Traditional & More. Henna Artist by Himani Patel located in Surat, Gujarat.",
+  icons: {
+    icon: "/hp_logo.png",
+    apple: "/hp_logo.png",
+  },
+  openGraph: {
+    title: "HP Mehendi Art | Elegant Mehndi Designs",
+    description: "Luxury bridal and traditional Mehndi designs by Himani Patel, Surat.",
+    images: ["/hp_logo.png"],
+    type: "website",
+  },
 };
 
 export default function RootLayout({
