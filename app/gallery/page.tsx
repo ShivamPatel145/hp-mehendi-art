@@ -84,8 +84,7 @@ export default function GalleryPage() {
                 className="break-inside-avoid relative"
               >
                 <Dialog>
-                  <DialogTrigger asChild>
-                    <div className="relative group overflow-hidden rounded-xl md:rounded-2xl cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 w-full mb-4 sm:mb-6">
+                  <DialogTrigger render={<div className="relative group overflow-hidden rounded-xl md:rounded-2xl cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 w-full mb-4 sm:mb-6" />}>
                       <img 
                         src={img.src} 
                         alt={img.alt} 
@@ -100,8 +99,7 @@ export default function GalleryPage() {
                         <span className="text-white font-medium text-xs sm:text-sm md:text-base mt-4 tracking-wide transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
                           {img.category}
                         </span>
-                      </div>
-                    </div>
+                       </div>
                   </DialogTrigger>
 
                   {/* Lightbox Content */}
