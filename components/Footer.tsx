@@ -70,7 +70,7 @@ export function Footer() {
             {/* Social Icons */}
             <div className="flex gap-3 mt-5">
               <a
-                href="https://www.instagram.com/hp_mehendi_art"
+                href="https://www.instagram.com/himani_patel_06"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -132,8 +132,8 @@ export function Footer() {
               </li>
               <li className="flex items-center justify-center sm:justify-start gap-3">
                 <Mail className="text-accent shrink-0" size={18} />
-                <a href="mailto:book@hpmehendiart.com" className="text-[#FAF7F2]/70 hover:text-accent transition-colors text-sm break-all">
-                  book@hpmehendiart.com
+                <a href="mailto:himani6620@gmail.com" className="text-[#FAF7F2]/70 hover:text-accent transition-colors text-sm break-all">
+                  himani6620@gmail.com
                 </a>
               </li>
             </ul>
