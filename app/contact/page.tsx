@@ -21,8 +21,8 @@ const contactDetails = [
   {
     icon: Mail,
     label: "Email",
-    value: "book@hpmehendiart.com",
-    href: "mailto:book@hpmehendiart.com",
+    value: "himani6620@gmail.com",
+    href: "mailto:himani6620@gmail.com",
   },
   {
     icon: Clock,
@@ -140,7 +140,7 @@ export default function ContactPage() {
             {/* Social + Review row */}
             <div className="grid grid-cols-2 gap-4">
               <a
-                href="https://www.instagram.com/hp_mehendi_art"
+                href="https://www.instagram.com/himani_patel_06"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-secondary text-foreground rounded-2xl py-4 font-semibold text-sm border border-accent/20 shadow-sm hover:shadow-md hover:bg-secondary/80 hover:border-accent/40 hover:scale-[1.02] transition-all"
