@@ -1,4 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
+import dbConnect from './db';
+import ImageModel from '@/models/Image';
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -11,31 +13,38 @@ export type CloudinaryImage = {
   id: string;
   src: string;
   category: string;
+  folder: string;
   alt: string;
   width: number;
   height: number;
 };
 
+export async function getCloudinaryFolders(): Promise<string[]> {
+  try {
+    const result = await cloudinary.api.root_folders();
+    return result.folders.map((f: any) => f.name);
+  } catch (error) {
+    console.error("Error fetching folders:", error);
+    return ["hp_mehendi_gallery"];
+  }
+}
+
 export async function getGalleryImages(): Promise<CloudinaryImage[]> {
   try {
-    const results = await cloudinary.search
-      .expression('resource_type:image')
-      .with_field('tags')
-      .sort_by('created_at', 'desc')
-      .max_results(100)
-      .execute();
-      
-    return results.resources.map((resource: any) => ({
-      id: resource.public_id,
-      src: resource.secure_url,
-      // Map the first tag to the category, or default to a safe value
-      category: resource.tags && resource.tags.length > 0 ? resource.tags[0] : "Traditional", 
-      alt: `Mehndi Design - ${resource.public_id}`,
-      width: resource.width,
-      height: resource.height,
+    await dbConnect();
+    const images = await ImageModel.find({}).sort({ createdAt: -1 }).lean();
+
+    return images.map((img: any) => ({
+      id: img.public_id,
+      src: img.url,
+      category: img.category,
+      folder: img.folder || "",
+      alt: img.alt || `Mehndi Design`,
+      width: img.width || 800,
+      height: img.height || 600,
     }));
   } catch (error) {
-    console.error("Error fetching from Cloudinary:", error);
+    console.error("Error fetching images from DB:", error);
     return [];
   }
 }

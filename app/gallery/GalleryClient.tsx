@@ -85,8 +85,7 @@ export default function GalleryClient({ initialImages }: { initialImages: Cloudi
                 className="break-inside-avoid relative"
               >
                 <Dialog>
-                  <DialogTrigger asChild>
-                    <div className="relative group overflow-hidden rounded-xl md:rounded-2xl cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 w-full mb-4 sm:mb-6 block">
+                  <DialogTrigger render={<div className="relative group overflow-hidden rounded-xl md:rounded-2xl cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 w-full mb-4 sm:mb-6 block" />}>
                       <CldImage 
                         src={img.id} 
                         alt={img.alt} 
@@ -104,7 +103,6 @@ export default function GalleryClient({ initialImages }: { initialImages: Cloudi
                           {img.category}
                         </span>
                       </div>
-                    </div>
                   </DialogTrigger>
 
                   {/* Lightbox Content */}

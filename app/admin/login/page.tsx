@@ -1,10 +1,42 @@
-import { signIn } from "@/auth"
-import { AuthError } from "next-auth"
-import { redirect } from "next/navigation"
+"use client";
 
-export default function LoginPage(props: { searchParams: { error?: string } }) {
-  const { searchParams } = props;
-  const error = searchParams?.error;
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (res.ok) {
+        router.push("/admin");
+        router.refresh();
+      } else {
+        const data = await res.json();
+        setError(data.error || "Login failed");
+      }
+    } catch (err) {
+      setError("An unexpected error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -14,33 +46,10 @@ export default function LoginPage(props: { searchParams: { error?: string } }) {
           <p className="text-muted-foreground">Sign in to manage the gallery.</p>
         </div>
 
-        <form
-          action={async (formData) => {
-            "use server"
-            try {
-              await signIn("credentials", formData)
-            } catch (error) {
-              if (error instanceof AuthError) {
-                switch (error.type) {
-                  case "CredentialsSignin":
-                    redirect("/admin/login?error=CredentialsSignin")
-                  default:
-                    redirect("/admin/login?error=UnknownError")
-                }
-              }
-              throw error // Rethrow to let Next.js handle redirect
-            }
-          }}
-          className="space-y-4"
-        >
-          {error === "CredentialsSignin" && (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && (
             <div className="p-3 bg-red-100 text-red-600 rounded-md text-sm text-center">
-              Invalid username or password
-            </div>
-          )}
-          {error === "UnknownError" && (
-            <div className="p-3 bg-red-100 text-red-600 rounded-md text-sm text-center">
-              Something went wrong.
+              {error}
             </div>
           )}
           
@@ -65,9 +74,10 @@ export default function LoginPage(props: { searchParams: { error?: string } }) {
           
           <button 
             type="submit" 
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-2 rounded-md font-medium transition-colors"
+            disabled={loading}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-2 rounded-md font-medium transition-colors disabled:opacity-50"
           >
-            Sign In
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
       </div>
