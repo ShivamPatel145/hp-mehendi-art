@@ -12,14 +12,21 @@ export async function GET() {
   try {
     await dbConnect();
 
-    let services = await ServiceModel.find({}).sort({ order: 1 }).lean();
+    const validSlugs = DEFAULT_SERVICES.map((s) => s.slug);
 
-    // Seed defaults if DB is empty
-    if (services.length === 0) {
-      await ServiceModel.insertMany(DEFAULT_SERVICES);
-      services = await ServiceModel.find({}).sort({ order: 1 }).lean();
+    // Remove any services that are no longer in DEFAULT_SERVICES
+    await ServiceModel.deleteMany({ slug: { $nin: validSlugs } });
+
+    // Upsert each default service (preserves price/description if admin edited them)
+    for (const svc of DEFAULT_SERVICES) {
+      await ServiceModel.updateOne(
+        { slug: svc.slug },
+        { $setOnInsert: { price: svc.price, description: svc.description, image: svc.image, title: svc.title, order: svc.order } },
+        { upsert: true }
+      );
     }
 
+    const services = await ServiceModel.find({}).sort({ order: 1 }).lean();
     return NextResponse.json(services);
   } catch (error) {
     console.error("Services GET error:", error);

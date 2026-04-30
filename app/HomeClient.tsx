@@ -170,7 +170,7 @@ export default function HomeClient({ images }: { images: CloudinaryImage[] }) {
               { title: 'Bridal Mehndi', desc: 'Intricate & full-length luxury designs.', img: '/images/bridal_service.png' },
               { title: 'Traditional Mehndi', desc: 'Classic Rajasthani & Indian patterns.', img: '/images/traditional_service.png' },
               { title: 'Baby Shower', desc: 'Delicate designs celebrating motherhood.', img: '/images/baby_shower_service.png' },
-              { title: 'Western Mehndi', desc: 'Minimalist & modern henna aesthetics.', img: '/images/western_service.png' }
+              { title: 'Engagement Mehndi', desc: 'Elegant semi-heavy designs for your special moment.', img: '/images/10.jpeg' }
             ].map((service, idx) => (
               <motion.div key={idx} variants={fadeInUp}>
                 <Card className="p-0 gap-0 h-full border-accent/20 hover:border-accent/60 hover:shadow-xl transition-all duration-500 bg-background group overflow-hidden">
