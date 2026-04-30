@@ -6,6 +6,7 @@ import { categories } from "@/lib/data";
 import { CloudinaryImage } from "@/lib/cloudinary";
 import { useRouter } from "next/navigation";
 import { Trash2, Loader2, Folder, UploadCloud, CheckCircle, X, ImageIcon, KeyRound, Settings2, IndianRupee } from "lucide-react";
+import imageCompression from "browser-image-compression";
 
 type UploadFile = {
   file: File;
@@ -117,15 +118,32 @@ export default function AdminDashboard({
     setIsUploading(true);
     setUploadMessage(null);
 
-    const formData = new FormData();
-    formData.append("category", selectedTag);
-    formData.append("folder", activeFolder);
-    uploadFiles.forEach((uf) => formData.append("files", uf.file));
-
-    // Mark all as uploading
+    // Mark all as uploading immediately
     setUploadFiles((prev) => prev.map((f) => ({ ...f, status: "uploading" })));
 
     try {
+      const formData = new FormData();
+      formData.append("category", selectedTag);
+      formData.append("folder", activeFolder);
+      
+      // Compress each file before sending to bypass Vercel's 4.5MB payload limit
+      for (const uf of uploadFiles) {
+        try {
+          const compressedFile = await imageCompression(uf.file, {
+            maxSizeMB: 1.5,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+            initialQuality: 0.8,
+          });
+          // Rename file extension if it's HEIC (since we converted it)
+          const newName = uf.file.name.replace(/\.(heic|HEIC)$/, '.jpg');
+          formData.append("files", new File([compressedFile], newName, { type: compressedFile.type }));
+        } catch (err) {
+          console.warn("Compression failed for", uf.file.name, err);
+          formData.append("files", uf.file); // Fallback to original if compression fails
+        }
+      }
+
       const res = await fetch("/api/upload", { method: "POST", body: formData });
       const data = await res.json();
 
