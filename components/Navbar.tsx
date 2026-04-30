@@ -10,14 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -37,16 +30,7 @@ export function Navbar() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 w-full z-[60] transition-all duration-500 ${
-          scrolled
-            ? "bg-background/95 backdrop-blur-xl shadow-[0_2px_32px_0_rgba(0,0,0,0.08)] border-b border-accent/10"
-            : "bg-transparent"
-        }`}
-      >
+      <nav className="fixed top-0 w-full z-[60] bg-background/80 backdrop-blur-lg border-b border-accent/10 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
 
@@ -121,7 +105,7 @@ export function Navbar() {
             </div>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Full-screen Mobile Menu */}
       <AnimatePresence>

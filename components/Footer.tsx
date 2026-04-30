@@ -50,12 +50,12 @@ export function Footer() {
   return (
     <footer className="bg-[#2C1810] text-[#FAF7F2]">
       {/* Main footer content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-8 lg:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-8 lg:gap-12">
 
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left">
-            <div className="bg-white p-2.5 rounded-xl inline-block shadow-sm mb-4">
+            <div className="bg-white p-2 sm:p-2.5 rounded-xl inline-block shadow-sm mb-3 sm:mb-4">
               <Image
                 src="/hp_logo.png"
                 alt="HP Mehendi Art"
@@ -68,7 +68,7 @@ export function Footer() {
               Elegant Mehndi Designs for Every Occasion. Specializing in luxury bridal, traditional, and modern henna art.
             </p>
             {/* Social Icons */}
-            <div className="flex gap-3 mt-5">
+            <div className="flex gap-3 mt-4 sm:mt-5">
               <a
                 href="https://www.instagram.com/himani_patel_06"
                 target="_blank"
@@ -90,10 +90,10 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="text-center sm:text-left">
-            <h4 className="font-heading text-lg font-semibold text-accent mb-5 uppercase tracking-wider">
+            <h4 className="font-heading text-base sm:text-lg font-semibold text-accent mb-3 sm:mb-5 uppercase tracking-wider">
               Quick Links
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {[
                 { label: "Home", href: "/" },
                 { label: "Gallery", href: "/gallery" },
@@ -114,10 +114,10 @@ export function Footer() {
 
           {/* Contact */}
           <div className="text-center sm:text-left">
-            <h4 className="font-heading text-lg font-semibold text-accent mb-5 uppercase tracking-wider">
+            <h4 className="font-heading text-base sm:text-lg font-semibold text-accent mb-3 sm:mb-5 uppercase tracking-wider">
               Contact Us
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4">
               <li className="flex items-start justify-center sm:justify-start gap-3">
                 <MapPin className="text-accent shrink-0 mt-0.5" size={18} />
                 <span className="text-[#FAF7F2]/70 text-sm leading-snug">
@@ -143,7 +143,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#FAF7F2]/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#FAF7F2]/40">
           <p className="text-center sm:text-left">
             &copy; {new Date().getFullYear()} Himani Patel Mehendi Art. All rights reserved.
           </p>

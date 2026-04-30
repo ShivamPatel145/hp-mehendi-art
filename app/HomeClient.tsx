@@ -51,12 +51,12 @@ export default function HomeClient({ images }: { images: CloudinaryImage[] }) {
             className="mb-6 md:mb-8"
           >
             <div className="mx-auto mb-6 md:mb-8 flex justify-center">
-              <Image src="/hp_logo.png" alt="HP Mehendi Art" width={1000} height={530} className="h-24 sm:h-28 md:h-36 w-auto object-contain mix-blend-multiply" priority />
+              <Image src="/hp_logo.png" alt="HP Mehendi Art" width={1000} height={530} className="h-32 sm:h-40 md:h-56 w-auto object-contain mix-blend-multiply" priority />
             </div>
-            <div className="inline-block mb-4 md:mb-6">
-              <span className="text-sm sm:text-base md:text-xl text-accent font-medium tracking-[0.3em] uppercase bg-background/50 backdrop-blur-sm px-6 py-2 rounded-full border border-accent/20">
+            <div className="inline-flex justify-center max-w-[90vw] mb-4 md:mb-6">
+              <div className="text-xs sm:text-base md:text-xl text-black font-medium tracking-[0.15em] sm:tracking-[0.3em] uppercase bg-background/50 backdrop-blur-sm px-4 sm:px-6 py-2 md:py-3 rounded-full border border-accent/20 text-center leading-relaxed">
                 Henna Artist by Himani Patel
-              </span>
+              </div>
             </div>
             <h1 className="font-heading text-5xl sm:text-6xl md:text-8xl font-bold text-foreground leading-[1.1] drop-shadow-sm">
               Elegant Mehndi <br/>
@@ -82,7 +82,7 @@ export default function HomeClient({ images }: { images: CloudinaryImage[] }) {
             <Button render={<a href={generateWhatsAppLink("Hi Himani! I'm interested in booking a Mehndi session.")} target="_blank" rel="noopener noreferrer" />} size="lg" className="bg-primary text-primary-foreground rounded-full px-8 py-7 md:py-8 text-lg w-full sm:w-auto shadow-[0_8px_30px_rgb(107,142,35,0.3)]">
               Book on WhatsApp
             </Button>
-            <Button nativeButton={false} render={<Link href="/gallery" />} variant="outline" size="lg" className="rounded-full px-8 py-7 md:py-8 text-lg w-full sm:w-auto border-accent text-foreground hover:bg-accent hover:text-accent-foreground transition-all bg-background/80 backdrop-blur-md shadow-sm">
+            <Button render={<Link href="/gallery" />} variant="outline" size="lg" className="rounded-full px-8 py-7 md:py-8 text-lg w-full sm:w-auto border-accent text-foreground hover:bg-accent hover:text-accent-foreground transition-all bg-background/80 backdrop-blur-md shadow-sm">
               View Gallery
             </Button>
           </motion.div>
@@ -164,7 +164,7 @@ export default function HomeClient({ images }: { images: CloudinaryImage[] }) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-8 sm:grid sm:grid-cols-2 lg:grid-cols-4 md:gap-6 px-4 sm:px-0 -mx-4 sm:mx-0"
           >
             {[
               { title: 'Bridal Mehndi', desc: 'Intricate & full-length luxury designs.', img: '/images/bridal_service.png' },
@@ -172,7 +172,7 @@ export default function HomeClient({ images }: { images: CloudinaryImage[] }) {
               { title: 'Baby Shower', desc: 'Delicate designs celebrating motherhood.', img: '/images/baby_shower_service.png' },
               { title: 'Engagement Mehndi', desc: 'Elegant semi-heavy designs for your special moment.', img: '/images/10.jpeg' }
             ].map((service, idx) => (
-              <motion.div key={idx} variants={fadeInUp}>
+              <motion.div key={idx} variants={fadeInUp} className="min-w-[85vw] sm:min-w-0 snap-center">
                 <Card className="p-0 gap-0 h-full border-accent/20 hover:border-accent/60 hover:shadow-xl transition-all duration-500 bg-background group overflow-hidden">
                   <div className="relative w-full h-56 sm:h-64 overflow-hidden shrink-0">
                     <Image 
