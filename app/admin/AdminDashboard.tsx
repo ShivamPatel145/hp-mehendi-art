@@ -229,10 +229,7 @@ export default function AdminDashboard({
             </div>
 
             {/* Drop zone */}
-            <div
-              className="border-2 border-dashed border-accent/30 rounded-xl p-6 text-center cursor-pointer hover:border-accent/60 hover:bg-accent/5 transition-colors"
-              onClick={() => fileInputRef.current?.click()}
-            >
+            <div className="relative border-2 border-dashed border-accent/30 rounded-xl p-6 text-center hover:border-accent/60 hover:bg-accent/5 transition-colors">
               <UploadCloud className="w-8 h-8 mx-auto text-accent/50 mb-2" />
               <p className="text-sm font-medium text-foreground">Click to select images</p>
               <p className="text-xs text-muted-foreground mt-1">or drag and drop · Multiple files supported</p>
@@ -240,8 +237,8 @@ export default function AdminDashboard({
                 ref={fileInputRef}
                 type="file"
                 multiple
-                accept="image/*"
-                className="hidden"
+                accept="image/*, image/heic, image/heif"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 onChange={handleFileSelect}
               />
             </div>
